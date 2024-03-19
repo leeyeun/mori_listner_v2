@@ -73,7 +73,7 @@ function SignupScreen({ navigation }) {
         formdata.append('mt_pwd', password.trim())
         formdata.append('mt_pwd_re', passwordCheck.trim())
         const resultcheck = await post('/api/member_join_check.php', formdata);
-
+        console.log(resultcheck);
         if (resultcheck?.result == 'false') {
             setErrmsg(resultcheck.msg);
             setErrmsgCheck(true);

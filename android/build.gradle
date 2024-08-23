@@ -2,10 +2,10 @@
 
 buildscript {
     ext {
-        buildToolsVersion = "33.0.0"
+        buildToolsVersion = "34.0.0"
         minSdkVersion = 21
-        compileSdkVersion = 33
-        targetSdkVersion = 33
+        compileSdkVersion = 34
+        targetSdkVersion = 34
         kotlinVersion = '1.6.0'
         googlePlayServicesVersion = "17.0.0"
         if (System.properties['os.arch'] == "aarch64") {

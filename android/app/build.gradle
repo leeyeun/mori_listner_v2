@@ -134,8 +134,8 @@ android {
         applicationId "com.mori.listener.aos"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 10
-        versionName "1.4"
+        versionCode 14
+        versionName "2.3"
         multiDexEnabled true
     }
     splits {
@@ -196,6 +196,7 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    implementation 'com.facebook.android:facebook-android-sdk:latest.release'
     implementation platform('com.google.firebase:firebase-bom:28.3.1')
 //    implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
     implementation 'io.agora.rtc:full-sdk:3.5.2'

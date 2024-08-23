@@ -51,16 +51,16 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb139592148314106</string>
+				<string>fb438180334454176</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FacebookAppID</key>
-	<string>139592148314106</string>
+	<string>438180334454176</string>
 	<key>FacebookClientToken</key>
-	<string>212b507a56cc9420cd7615fce6167140</string>
+	<string>d5fbb14cf0dd9676a84bf06701072fac</string>
 	<key>FacebookDisplayName</key>
 	<string>mori</string>
 	<key>KAKAO_APP_KEY</key>
@@ -79,6 +79,7 @@
 		<string>fbapi20150629</string>
 		<string>fbapi20160328</string>
 		<string>fbauth</string>
+		<string>fb-messenger-api</string>
 		<string>fb-messenger-share-api</string>
 		<string>fbauth2</string>
 		<string>fbshareextension</string>

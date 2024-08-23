@@ -9,7 +9,7 @@ import {
   Alert,
 } from 'react-native';
 // import {NaverLogin, getProfile} from '@react-native-seoul/naver-login';
-import NaverLogin,{
+import NaverLogin, {
   NaverLoginResponse,
   GetProfileResponse,
 } from '@react-native-seoul/naver-login';
@@ -168,32 +168,95 @@ function LoginAndSignScreen({navigation}) {
     }
   };
   const facebooklogin = () => {
-    LoginManager.logInWithPermissions(['public_profile']).then(
+    LoginManager.logInWithPermissions(['public_profile', 'email']).then(
       async result => {
         if (result.isCancelled) {
           Alert.alert('로그인 취소', 'login cancelled');
         } else {
-          setTimeout(() => {
-            getfacebookprofile();
-          }, 1000);
-          async function getfacebookprofile() {
-            const profile = await Profile.getCurrentProfile();
+          const accessToken = await AccessToken.getCurrentAccessToken();
+          const profile = await Profile.getCurrentProfile();
+          if (accessToken && profile) {
+            console.log('accessToken', accessToken);
+            console.log('dddd', accessToken.userID);
+            getFacebookProfile();
+          } else if (accessToken && profile == null) {
             const formdata = new FormData();
             formdata.append('set_lang', lang);
-            formdata.append('sns_id', profile.userID);
+            formdata.append('sns_id', accessToken.userID);
             formdata.append('app_token', apptoken);
-            formdata.append('mt_email', profile?.email ?? '');
-            formdata.append('mt_name', profile?.name ?? '');
+            formdata.append('mt_email', '');
+            formdata.append('mt_name', '');
+
             console.log('facebook :: ', profile);
+            console.log('formdata :: ', formdata);
+
             socialLogin('/api/SNS_login_facebook.php', formdata);
+          } else {
+            Alert.alert('로그인 실패', '토큰을 가져올 수 없습니다.');
           }
         }
       },
       error => {
-        Alert.alert('로그인 실패', error);
+        Alert.alert('로그인 실패', error.toString());
       },
     );
   };
+
+  async function getFacebookProfile() {
+    try {
+      const profile = await Profile.getCurrentProfile();
+      console.log('facebook :: ', profile);
+      if (profile) {
+        const formdata = new FormData();
+        formdata.append('set_lang', lang);
+        formdata.append('sns_id', profile.userID);
+        formdata.append('app_token', apptoken);
+        formdata.append('mt_email', profile.email ?? '');
+        formdata.append('mt_name', profile.name ?? '');
+
+        console.log('facebook :: ', profile);
+        console.log('formdata :: ', formdata);
+
+        socialLogin('/api/SNS_login_facebook.php', formdata);
+      } else {
+        Alert.alert(
+          '프로필 정보 없음',
+          'Facebook 프로필 정보를 가져올 수 없습니다.',
+        );
+      }
+    } catch (error) {
+      console.error('Facebook 프로필을 가져오는 중 오류 발생:', error);
+    }
+  }
+  // const facebooklogin = () => {
+  //   LoginManager.logInWithPermissions(['public_profile']).then(
+  //     async result => {
+  //       if (result.isCancelled) {
+  //         Alert.alert('로그인 취소', 'login cancelled');
+  //       } else {
+  //         setTimeout(() => {
+  //           getfacebookprofile();
+  //         }, 1000);
+  //         async function getfacebookprofile() {
+  //           const profile = await Profile.getCurrentProfile();
+  //           console.log('profile', profile);
+  //           const formdata = new FormData();
+  //           formdata.append('set_lang', lang);
+  //           formdata.append('sns_id', profile.userID);
+  //           formdata.append('app_token', apptoken);
+  //           formdata.append('mt_email', profile?.email ?? '');
+  //           formdata.append('mt_name', profile?.name ?? '');
+  //           console.log('facebook :: ', profile);
+  //           console.log('formdata :: ', formdata);
+  //           socialLogin('/api/SNS_login_facebook.php', formdata);
+  //         }
+  //       }
+  //     },
+  //     error => {
+  //       Alert.alert('로그인 실패', error);
+  //     },
+  //   );
+  // };
   const applelogin = async () => {
     if (Platform.OS === 'ios') {
       try {

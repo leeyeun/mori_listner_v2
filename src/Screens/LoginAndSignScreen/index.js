@@ -76,7 +76,6 @@ function LoginAndSignScreen({navigation}) {
     }
     async function getFcmToken() {
       const fcmToken = await getToken();
-      console.log('defaulttoken 333 ::', fcmToken);
       setApptoken(fcmToken);
       dispatch(set_token({token: fcmToken}));
     }
@@ -88,54 +87,42 @@ function LoginAndSignScreen({navigation}) {
   }, []);
   const {messages} = useIntl();
 
-  const naverlogin = props => {
-    return new Promise((resolve, reject) => {
-      console.log(props);
-      NaverLogin.login(props, (err, token) => {
-        console.log(`\n\n  token is fetched  :: ${typeof token} \n\n`);
-        if (token == null) {
-          resolve(null);
-          return;
-        }
-        setNaverToken(token);
-        getUserProfile(token.accessToken);
-        if (err) {
-          reject(err);
-          return;
-        }
-        resolve(token);
-      });
-    });
+  useEffect(() => {
+    NaverLogin.initialize(androidKeys);
+  }, []);
+
+  const naverlogin = async props => {
+    try {
+      const {failureResponse, successResponse} = await NaverLogin.login();
+      if (successResponse) {
+        getUserProfile(successResponse.accessToken);
+      } else {
+        Alert.alert('', failureResponse.message);
+      }
+    } catch (error) {
+      console.error('naver login error:', error);
+    }
   };
 
   const getUserProfile = async token => {
-    const profileResult = await getProfile(token);
-    if (profileResult.resultcode === '024') {
-      Alert.alert('', profileResult.message);
-      return;
-    }
-    console.log('profileResult', profileResult, token);
-    if (profileResult?.message == 'success') {
-      const fcmToken = await getToken();
+    const profileResult = await NaverLogin.getProfile(token);
+    const fcmToken = await getToken();
 
-      const formdata = new FormData();
-      formdata.append('set_lang', lang);
-      formdata.append('sns_id', profileResult.response.id);
-      formdata.append('app_token', fcmToken);
-      formdata.append('mt_name', profileResult?.response?.name ?? '');
-      formdata.append('mt_email', profileResult?.response?.email ?? '');
-      console.log('naver ::: ', profileResult);
-      socialLogin('/api/SNS_login_naver.php', formdata);
-    }
+    const formdata = new FormData();
+    formdata.append('set_lang', lang);
+    formdata.append('sns_id', profileResult.response.id);
+    formdata.append('app_token', fcmToken);
+    formdata.append('mt_name', profileResult?.response?.name ?? '');
+    formdata.append('mt_email', profileResult?.response?.email ?? '');
+    console.log('naver ::: ', profileResult);
+    socialLogin('/api/SNS_login_naver.php', formdata);
   };
 
   const kakaologin = async () => {
     try {
       const kakaoToken = await kLogin();
-      console.log('kakao ', kakaoToken);
       await getKakaoProfileHandler(kakaoToken.accessToken);
     } catch (err) {
-      console.log(err);
       Alert.alert(
         '카카오톡 계정 정보가 없습니다.',
         '카카오톡을 사용 중이신지 확인해주세요.',

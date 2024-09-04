@@ -17,7 +17,6 @@ target 'morilistener' do
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'Firebase/Messaging'
-  pod 'naveridlogin-sdk-ios'
   target 'morilistenerTests' do
     inherit! :complete
     # Pods for testing

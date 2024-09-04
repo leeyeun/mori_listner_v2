@@ -644,7 +644,7 @@ PODS:
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
-  - naveridlogin-sdk-ios (4.1.6)
+  - naveridlogin-sdk-ios (4.2.1)
   - OpenSSL-Universal (1.1.1100)
   - PromisesObjC (2.4.0)
   - RCT-Folly (2021.07.22.00):
@@ -997,9 +997,10 @@ PODS:
   - RNGoogleSignin (6.0.1):
     - GoogleSignIn (~> 5.0.0)
     - React-Core
-  - RNNaverLogin (3.0.0):
-    - naveridlogin-sdk-ios (~> 4.1.5)
-    - React
+  - RNNaverLogin (4.0.1):
+    - naveridlogin-sdk-ios (= 4.2.1)
+    - RCT-Folly (= 2021.07.22.00)
+    - React-Core
   - RNScreens (3.34.0):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
@@ -1041,7 +1042,6 @@ DEPENDENCIES:
   - FlipperKit/SKIOSNetworkPlugin (= 0.125.0)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - "kakao-login (from `../node_modules/@react-native-seoul/kakao-login`)"
-  - naveridlogin-sdk-ios
   - OpenSSL-Universal (= 1.1.1100)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
@@ -1291,7 +1291,7 @@ SPEC CHECKSUMS:
   leveldb-library: e8eadf9008a61f9e1dde3978c086d2b6d9b9dc28
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
-  naveridlogin-sdk-ios: cdd34e3585a3d5aaf37c1d84c1f41faba4a25d1a
+  naveridlogin-sdk-ios: d5f9d92905a7e964976ebfdd665bee5fb75845c5
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   RCT-Folly: 424b8c9a7a0b9ab2886ffe9c3b041ef628fd4fb1
@@ -1336,12 +1336,12 @@ SPEC CHECKSUMS:
   RNFileViewer: ce7ca3ac370e18554d35d6355cffd7c30437c592
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNGoogleSignin: e64616a4080cf7d83f4b292fad82d174587444e2
-  RNNaverLogin: dc2758a157dafaa1ffca63079cad4d4c75208a30
+  RNNaverLogin: 55ca809a5bf5bd5829b934d3e92e3580c8cf4bcc
   RNScreens: 80369e822c4f123c3f076c9ea4141991c17770f9
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 065f0b74dba4832d6e328238de46eb72c5de9556
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: d53dd2558b68bfdef7be55a2701244f7fe091010
+PODFILE CHECKSUM: 65db20dcb291148cf64a7e22a067705ddc3bf9b5
 
 COCOAPODS: 1.14.3

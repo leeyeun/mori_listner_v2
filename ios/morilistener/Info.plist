@@ -25,6 +25,16 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>naver</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>morilistener</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>kakaof932c38d1d16972b0157c8a5ab7eaf39</string>
@@ -67,6 +77,8 @@
 	<string>f932c38d1d16972b0157c8a5ab7eaf39</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+	 	<string>naversearchapp</string>
+  	<string>naversearchthirdlogin</string>
 		<string>fbapi</string>
 		<string>fbapi20130214</string>
 		<string>fbapi20130410</string>

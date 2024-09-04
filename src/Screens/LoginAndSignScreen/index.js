@@ -49,7 +49,7 @@ const iosKeys = {
   consumerKey: 'ZIi4Wpw4nc4fgcRrWh7k',
   consumerSecret: 'NXykZyW6Ib',
   appName: '모리',
-  serviceUrlScheme: 'morilistener', // only for iOS
+  serviceUrlSchemeIOS: 'morilistener', // only for iOS
 };
 
 const androidKeys = {
@@ -59,6 +59,7 @@ const androidKeys = {
 };
 const initials = Platform.OS === 'ios' ? iosKeys : androidKeys;
 function LoginAndSignScreen({navigation}) {
+  console.log('initials', initials);
   const lang = useSelector(state => state.LangsReducer.langs);
   const [isopen, setIsopen] = useState(false);
   const [naverToken, setNaverToken] = useState(null);
@@ -88,7 +89,7 @@ function LoginAndSignScreen({navigation}) {
   const {messages} = useIntl();
 
   useEffect(() => {
-    NaverLogin.initialize(androidKeys);
+    NaverLogin.initialize(initials);
   }, []);
 
   const naverlogin = async props => {
